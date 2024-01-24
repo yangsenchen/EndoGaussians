@@ -1,0 +1,6 @@
+__pycache__/
+.idea/
+data/
+output/
+_script/
+.vscode/

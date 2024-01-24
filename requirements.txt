@@ -1,0 +1,2 @@
+submodules/diff-gaussian-rasterization-confidence
+submodules/simple-knn
