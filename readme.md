@@ -15,3 +15,6 @@ conda env create --file environment.yml
 conda activate endogaussians
 pip install -r requirements.txt
 ```
+
+## Acknowledgement
+* This code is developed based on [Dynamic3DGaussians](https://github.com/JonathonLuiten/Dynamic3DGaussians) (Luiten et al.), and [3D-GS](https://github.com/graphdeco-inria/gaussian-splatting) (Kerbl et al.), [EndoNeRF](https://github.com/med-air/EndoNeRF) (Wang et at.).
