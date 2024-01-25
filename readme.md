@@ -17,4 +17,4 @@ pip install -r requirements.txt
 ```
 
 ## Acknowledgement
-* This code is developed based on [Dynamic3DGaussians](https://github.com/JonathonLuiten/Dynamic3DGaussians) (Luiten et al.), and [3D-GS](https://github.com/graphdeco-inria/gaussian-splatting) (Kerbl et al.), [EndoNeRF](https://github.com/med-air/EndoNeRF) (Wang et at.).
+* This code is developed based on [Dynamic3DGaussians](https://github.com/JonathonLuiten/Dynamic3DGaussians) (Luiten et al.), [3D-GS](https://github.com/graphdeco-inria/gaussian-splatting) (Kerbl et al.), [FSGS](https://github.com/VITA-Group/FSGS)[EndoNeRF](https://github.com/med-air/EndoNeRF) (Wang et at.).
