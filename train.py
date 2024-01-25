@@ -221,7 +221,7 @@ def train(seq, exp):
     optimizer = initialize_optimizer(params, variables)
     output_params = []
     print(f"./output/{exp}/{seq}", "    ", num_timesteps)
-    for t in range(2):
+    for t in range(num_timesteps):
         dataset = get_dataset(t, md, seq)
         todo_dataset = []
         is_initial_timestep = (t == 0)
@@ -249,6 +249,6 @@ def train(seq, exp):
 if __name__ == "__main__":
     cur_time = time.strftime("%Y%m%d-%H%M%S")
     exp_name = "pulling" + cur_time
-    for sequence in ["pulling","cut10depreinit"]: # , "boxes", "football", "juggle", "softball", "tennis"
+    for sequence in ["pulling","cutting"]: # , "boxes", "football", "juggle", "softball", "tennis"
         train(sequence, exp_name)
         torch.cuda.empty_cache()

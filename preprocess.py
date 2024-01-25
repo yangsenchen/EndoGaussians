@@ -110,15 +110,15 @@ def gen_train_meta_json(h, w, f, K, w2c, json_path, frame_nums):
 def gen_init_pt_cld_npz():
     pass
 
-# 3. run fgt to generate the masked part
+# 5. run fgt to generate the masked part
 
-# 4. use unimatch to generate stereo 
+# 6. use unimatch to generate stereo 
 
 
 if __name__ == "__main__":
 
     task = "pulling"
-    
+
     data_path = "data/" + task
     npy_path = data_path + "/poses_bounds.npy"
     json_path = data_path + "/train_meta.json"
