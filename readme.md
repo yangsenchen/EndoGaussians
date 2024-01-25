@@ -12,6 +12,6 @@ Official code for https://arxiv.org/abs/2401.13352
 ```
 git clone https://github.com/yangsenchen/EndoGaussians.git
 conda env create --file environment.yml
-conda activate gs
-pip install git+https://github.com/ingra14m/depth-diff-gaussian-rasterization.git
+conda activate endogaussians
+pip install -r requirements.txt
 ```
