@@ -28,12 +28,12 @@ def get_dataset(t, md, seq):
         
         ps_cam = setup_camera(w, h, k, w2c, near=1.0, far=100)
         fn = md['fn'][t][c]
-        im = np.array(copy.deepcopy(Image.open(f"./data/{seq}/ims/{fn}")))
+        im = np.array(copy.deepcopy(Image.open(f"./data/{seq}/images/{fn}")))
         im = torch.tensor(im).float().cuda().permute(2, 0, 1) / 255
 
-        seg = np.array(copy.deepcopy(Image.open(f"./data/{seq}/seg/{fn.replace('.jpg', '.png')}"))).astype(np.float32)
-        seg = torch.tensor(seg).float().cuda()
-        seg_col = torch.stack((seg, torch.zeros_like(seg), 1 - seg))
+        # seg = np.array(copy.deepcopy(Image.open(f"./data/{seq}/seg/{fn.replace('.jpg', '.png')}"))).astype(np.float32)
+        # seg = torch.tensor(seg).float().cuda()
+        # seg_col = torch.stack((seg, torch.zeros_like(seg), 1 - seg))
 
         depth = np.array(copy.deepcopy(Image.open(f"./data/{seq}/depth/{fn.replace('.jpg', '.png')}"))).astype(np.float32) /255
         depth = torch.tensor(depth).float().cuda()
@@ -41,7 +41,7 @@ def get_dataset(t, md, seq):
         mask = np.array(copy.deepcopy(Image.open(f"./data/{seq}/masks/{fn.replace('.jpg', '.png')}"))).astype(np.float32) /255
         mask = torch.tensor(mask).float().cuda()
 
-        dataset.append({'cam': cam, 'im': im, 'seg': seg_col, 'dep': depth, 'mask': mask ,'id': c})
+        dataset.append({'cam': cam, 'im': im,  'dep': depth, 'mask': mask ,'id': c}) # 'seg': seg_col,
     
     return dataset
 
@@ -109,7 +109,7 @@ def get_loss(params, curr_data, variables, is_initial_timestep, count):
     
     losses['im'] = 0.8 * l1_loss_v1(im, curr_data['im']) + 0.2 * (1.0 - calc_ssim(im, curr_data['im']))
    
-    losses['depth'] = l1_loss_v1(depth, curr_data['dep'][:,:,0])
+    losses['depth'] = l1_loss_v1(depth, curr_data['dep']) # [:,:,0]
 
     variables['means2D'] = rendervar['means2D']  # Gradient only accum from colour render for densification
 
@@ -148,7 +148,7 @@ def get_loss(params, curr_data, variables, is_initial_timestep, count):
     seen = radius > 0
     variables['max_2D_radius'][seen] = torch.max(radius[seen], variables['max_2D_radius'][seen])
     variables['seen'] = seen
-    return loss, variables, losses["depth"], losses["im"], (curr_data['dep'][:,:,0]).mean()
+    return loss, variables, losses["depth"], losses["im"], curr_data['dep'].mean() # [:,:,0])
 
 
 def initialize_per_timestep(params, variables, optimizer):
@@ -248,7 +248,7 @@ def train(seq, exp):
 
 if __name__ == "__main__":
     cur_time = time.strftime("%Y%m%d-%H%M%S")
-    exp_name = cur_time+"-cut10depreinit"
-    for sequence in ["cut10depreinit"]: # , "boxes", "football", "juggle", "softball", "tennis"
+    exp_name = "pulling" + cur_time
+    for sequence in ["pulling","cut10depreinit"]: # , "boxes", "football", "juggle", "softball", "tennis"
         train(sequence, exp_name)
         torch.cuda.empty_cache()
