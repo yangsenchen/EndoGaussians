@@ -2,7 +2,6 @@
 
 # EndoGaussians: Single View Dynamic Gaussian Splatting for Deformable Endoscopic Tissues Reconstruction
 
-Official code for https://arxiv.org/abs/2401.13352
 
 
 <img src="figures/teaser.png" alt="Reconstructed Image" style="zoom:75%;" />
